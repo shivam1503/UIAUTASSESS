@@ -1,21 +1,14 @@
 package stepDefinitions;
 
 import base.BaseTest;
-import io.cucumber.java.Before;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import pages.PageObjectsTest2;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import static io.cucumber.core.internal.com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 import static stepDefinitions.Hooks.pgObj2;
 

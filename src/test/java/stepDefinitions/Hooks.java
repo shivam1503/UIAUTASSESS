@@ -5,7 +5,6 @@ import base.BaseTest;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import io.cucumber.java.en.Given;
 import pages.PageObjects;
 import pages.PageObjectsTest2;
 import pages.PageObjectsTest3;
@@ -24,7 +23,7 @@ public class Hooks {
         System.out.println("test started");
         test = new BaseTest();
         test.setup();
-        pgObj = new PageObjects(driver);  // Initialize page objects with WebDriver
+        pgObj = new PageObjects(driver);
         pgObj2 = new PageObjectsTest2(driver);
         pgObj3 = new PageObjectsTest3(driver);
         System.out.println("Starting test: " + scenario.getName());

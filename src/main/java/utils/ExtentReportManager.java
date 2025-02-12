@@ -14,7 +14,6 @@ public class ExtentReportManager {
     private static ExtentTest test;
 
     public static ExtentReports createInstance() {
-            // Create the ExtentReport instance
             String reportPath = "target/ExtentReports/" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + "/index.html";
             ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
             sparkReporter.config().setDocumentTitle("Automation Test Report");

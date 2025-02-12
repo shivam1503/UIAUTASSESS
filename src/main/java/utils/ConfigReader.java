@@ -17,17 +17,14 @@ public class ConfigReader {
         }
     }
 
-    // Get property by key
     public static String getProperty(String key) {
         return properties.getProperty(key);
     }
 
-    // Get integer property
     public static int getIntProperty(String key) {
         return Integer.parseInt(properties.getProperty(key));
     }
 
-    // Get boolean property
     public static boolean getBooleanProperty(String key) {
         return Boolean.parseBoolean(properties.getProperty(key));
     }
