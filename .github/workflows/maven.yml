@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Automation workflow
 
 on:
   workflow_dispatch:
@@ -7,10 +7,6 @@ on:
         description: 'Branch to run the workflow on'
         required: true
         default: 'master'
-      distribution:
-        description: 'The distribution type for testing'
-        required: true
-        default: 'stable'  # Or provide a default value that makes sense for your case
 
 jobs:
   build:
@@ -38,5 +34,3 @@ jobs:
 
       - name: Run Tests
         run: mvn test
-        env:
-          DISTRIBUTION: ${{ github.event.inputs.distribution }}  
