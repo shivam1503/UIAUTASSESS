@@ -14,7 +14,6 @@ public class ExtentReportManager {
     private static ExtentTest test;
 
     public static ExtentReports createInstance() {
-        if (extent == null) {
             // Create the ExtentReport instance
             String reportPath = "target/ExtentReports/" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + "/index.html";
             ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
@@ -23,7 +22,6 @@ public class ExtentReportManager {
 
             extent = new ExtentReports();
             extent.attachReporter(sparkReporter);
-        }
         return extent;
     }
 
