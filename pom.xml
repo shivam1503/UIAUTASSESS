@@ -80,7 +80,6 @@
 
     <build>
         <plugins>
-            <!-- Use Failsafe Plugin Instead of Surefire -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
