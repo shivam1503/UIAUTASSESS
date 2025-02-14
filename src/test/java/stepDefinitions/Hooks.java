@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import base.BaseTest;
+import com.aventstack.extentreports.ExtentTest;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -33,17 +34,18 @@ public class Hooks {
 
     @After
     public void endTest(Scenario scenario) {
-        if (ExtentReportManager.getTest() == null) {
-            System.out.println("Error: ExtentTest instance is null for " + scenario.getName());
-            return;
+        ExtentTest test = ExtentReportManager.getTest();
+        if (test == null) {
+            System.err.println("🚨 ExtentTest is NULL for: " + scenario.getName());
+            return; // Skip logging if test instance is null
         }
 
         if (scenario.isFailed()) {
-            ExtentReportManager.logFail("Test Failed: " + scenario.getName());
+            test.fail("Test Failed: " + scenario.getName());
         } else {
-            ExtentReportManager.logPass("Test Passed: " + scenario.getName());
+            test.pass("Test Passed: " + scenario.getName());
         }
-        test.teardown();
+        //test.teardown();
     }
 
     @io.cucumber.java.AfterAll

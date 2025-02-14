@@ -8,30 +8,43 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ExtentReportManager {
-    private static ExtentReports extent = new ExtentReports();
+    private static ExtentReports extent;
+
+    // ThreadLocal to maintain separate ExtentTest instances for each thread
     private static ThreadLocal<ExtentTest> testThread = new ThreadLocal<>();
 
     // Initialize ExtentReports once
     public static ExtentReports getInstance() {
         if (extent == null) {
+            // Setting up the report file path and date format
             String reportPath = "target/ExtentReports/" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + "/index.html";
             ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
+
+            // Configuring the report
             sparkReporter.config().setDocumentTitle("Automation Test Report");
             sparkReporter.config().setReportName("Test Execution Report");
 
+            // Initializing ExtentReports and attaching the reporter
+            extent = new ExtentReports();
             extent.attachReporter(sparkReporter);
         }
-        return extent;
+        return extent; // Return the single instance of ExtentReports
     }
 
     // Start test and associate it with the current thread
-    public static synchronized void startTest(String testName) {
-        ExtentTest test = getInstance().createTest(testName);
-        testThread.set(test);
+    public static void startTest(String testName) {
+        // Check if the test has already been started
+        if (testThread.get() == null) {
+            ExtentTest test = getInstance().createTest(testName); // Create a new test
+            testThread.set(test); // Associate with the current thread
+        }
     }
 
     // Get test instance
     public static ExtentTest getTest() {
+        if (testThread.get() == null) {
+            throw new IllegalStateException("ExtentTest instance is null. Make sure startTest() is called.");
+        }
         return testThread.get();
     }
 
