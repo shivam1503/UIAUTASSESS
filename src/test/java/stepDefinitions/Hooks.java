@@ -27,7 +27,7 @@ public class Hooks {
         pgObj2 = new PageObjectsTest2(driver);
         pgObj3 = new PageObjectsTest3(driver);
         System.out.println("Starting test: " + scenario.getName());
-        ExtentReportManager.createInstance();
+        ExtentReportManager.getInstance();
         ExtentReportManager.startTest(scenario.getName());
     }
 
@@ -38,7 +38,11 @@ public class Hooks {
         } else {
             ExtentReportManager.logPass("Test Passed: " + scenario.getName());
         }
-        ExtentReportManager.endTest();
         test.teardown();
+    }
+
+    @io.cucumber.java.AfterAll
+    public static void flushReport() {
+        ExtentReportManager.flushReports();
     }
 }
